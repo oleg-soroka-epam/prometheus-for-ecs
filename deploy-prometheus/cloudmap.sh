@@ -49,7 +49,6 @@ CLOUDMAP_NODE_EXPORTER_SERVICE_ARN=$(aws servicediscovery get-service \
 --id $CLOUDMAP_NODE_EXPORTER_SERVICE_ID \
 --query "Service.Arn" --output text)
 echo "Service registry $SERVICE_REGISTRY_NAME created"
-echo "Service registry $SERVICE_REGISTRY_NAME created"
 
 export CLOUDMAP_NAMESPACE_ID
 export CLOUDMAP_NODE_EXPORTER_SERVICE_ARN
