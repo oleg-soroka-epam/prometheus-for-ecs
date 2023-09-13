@@ -4,9 +4,27 @@
 # Create a Service Discovery namespace
 #
 SERVICE_DISCOVERY_NAMESPACE=ecs-services
+OPERATION_ID=$(aws servicediscovery create-private-dns-namespace \
+--vpc $VPC_ID \
+--name $SERVICE_DISCOVERY_NAMESPACE \
+--query "OperationId" --output text)
 
+operationStatus() {
+  aws servicediscovery get-operation --operation-id $OPERATION_ID --query "Operation.Status" --output text
+}
 
-CLOUDMAP_NAMESPACE_ID=$(aws servicediscovery list-namespaces --filter "Name=NAME,Values=$SERVICE_DISCOVERY_NAMESPACE" --query "Namespaces[].Id" --output text)
+until [ $(operationStatus) != "PENDING" ]; do
+  echo "Namespace $SERVICE_DISCOVERY_NAMESPACE is creating ..."
+  sleep 10
+  if [ $(operationStatus) == "SUCCESS" ]; then
+    echo "Namespace $SERVICE_DISCOVERY_NAMESPACE created"
+    break
+  fi
+done
+
+CLOUDMAP_NAMESPACE_ID=$(aws servicediscovery get-operation \
+--operation-id $OPERATION_ID \
+--query "Operation.Targets.NAMESPACE" --output text)
 
 #
 # Create a Service Discovery service in the above namespace
