@@ -15,7 +15,7 @@ operationStatus() {
 
 until [ $(operationStatus) != "PENDING" ]; do
   echo "Namespace $SERVICE_DISCOVERY_NAMESPACE is creating ..."
-  sleep 10s
+  sleep 10
   if [ $(operationStatus) == "SUCCESS" ]; then
     echo "Namespace $SERVICE_DISCOVERY_NAMESPACE created"
     break
