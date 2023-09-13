@@ -8,7 +8,7 @@ export ASG_NAME=$(aws ecs describe-capacity-providers --capacity-providers "$CAP
 export LAUNCH_CONFIGURATION_NAME=$(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$ASG_NAME" | jq -r '.AutoScalingGroups[].LaunchConfigurationName'); echo $LAUNCH_CONFIGURATION_NAME
 export SECURITY_GROUP_ID=$(aws autoscaling describe-launch-configurations --launch-configuration-names "$LAUNCH_CONFIGURATION_NAME" | jq -r '.LaunchConfigurations[].SecurityGroups[]'); echo $SECURITY_GROUP_ID
 export VPC_ID=$(aws ec2 describe-security-groups --group-ids "$SECURITY_GROUP_ID" | jq -r '.SecurityGroups[].VpcId'); echo $VPC_ID
-export PRIVATE_SUBNET_IDS=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" "Name=tag:Tier,Values=private"  --query "Subnets[].SubnetId" --output json); echo $PRIVATE_SUBNET_IDS
+export PRIVATE_SUBNET_IDS=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" "Name=tag:Tier,Values=private"  --query "Subnets[].SubnetId" --output json | jq -c .); echo $PRIVATE_SUBNET_IDS
 export PUBLIC_SUBNET_IDS=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" "Name=tag:Tier,Values=public"  --query "Subnets[].SubnetId" --output text); echo $PUBLIC_SUBNET_IDS
 
 # export STACK_NAME=ecs-stack 
