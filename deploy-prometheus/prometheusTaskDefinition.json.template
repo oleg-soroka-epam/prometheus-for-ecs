@@ -100,11 +100,7 @@
             {
                 "containerName": "config-reloader",
                 "condition": "START"
-            },
-            {
-               "containerName": "aws-iamproxy",
-               "condition": "START"
-           }            
+            }         
         ],
          "essential":true
       }
