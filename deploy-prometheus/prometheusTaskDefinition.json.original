@@ -45,7 +45,37 @@
             }
          },
          "essential":true
-      },              
+      },         
+      {
+         "name":"aws-iamproxy",
+         "image":"public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0",
+         "cpu": 256,
+         "memory": 256,         
+         "portMappings":[
+            {
+               "containerPort":8080,
+               "protocol":"tcp"
+            }
+         ],
+         "command":[
+            "--name",
+            "aps",
+            "--region",
+            "REGION",
+            "--host",
+            "aps-workspaces.REGION.amazonaws.com"
+         ],         
+         "logConfiguration":{
+            "logDriver":"awslogs",
+            "options":{
+               "awslogs-group":"/ecs/Prometheus",
+               "awslogs-create-group":"true",
+               "awslogs-region":"REGION",
+               "awslogs-stream-prefix":"iamproxy"
+            }
+         },
+         "essential":true
+      },      
       {
          "name":"prometheus-server",
          "image":"quay.io/prometheus/prometheus:v2.24.0",

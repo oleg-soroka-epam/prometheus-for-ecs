@@ -6,27 +6,27 @@
 sed -e s/ACCOUNT/$ACCOUNT_ID/g \
 -e s/REGION/$AWS_REGION/g \
 < webappTaskDefinition.json.template \
-> webappTaskDefinition.json
+> /tmp/webappTaskDefinition.json
 WEBAPP_TASK_DEFINITION=$(aws ecs register-task-definition \
---cli-input-json file://webappTaskDefinition.json \
+--cli-input-json file:///tmp/webappTaskDefinition.json \
 --region $AWS_REGION \
 --query "taskDefinition.taskDefinitionArn" --output text)
 
 sed -e s/ACCOUNT/$ACCOUNT_ID/g \
 -e s/REGION/$AWS_REGION/g \
 < prometheusTaskDefinition.json.template \
-> prometheusTaskDefinition.json
+> /tmp/prometheusTaskDefinition.json
 PROMETHEUS_TASK_DEFINITION=$(aws ecs register-task-definition \
---cli-input-json file://prometheusTaskDefinition.json \
+--cli-input-json file:///tmp/prometheusTaskDefinition.json \
 --region $AWS_REGION \
 --query "taskDefinition.taskDefinitionArn" --output text)
 
 sed -e s/ACCOUNT/$ACCOUNT_ID/g \
 -e s/REGION/$AWS_REGION/g \
 < nodeExporterTaskDefinition.json.template \
-> nodeExporterTaskDefinition.json
+> /tmp/nodeExporterTaskDefinition.json
 NODEEXPORTER_TASK_DEFINITION=$(aws ecs register-task-definition \
---cli-input-json file://nodeExporterTaskDefinition.json \
+--cli-input-json file:///tmp/nodeExporterTaskDefinition.json \
 --region $AWS_REGION \
 --query "taskDefinition.taskDefinitionArn" --output text)
 
