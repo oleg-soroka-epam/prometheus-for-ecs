@@ -34,14 +34,14 @@ Make sure you have the latest version of AWS CLI that provides support for AMP. 
 
 
 The deploment scripts assume that the underlying ECS cluster was created using the [ecs-cluster.yaml](https://github.com/aws-samples/prometheus-for-ecs/blob/main/deploy-prometheus/ecs-cluster.yaml) CloudFormation template. 
-Create the cluster with the following command:
+<!-- Create the cluster with the following command:
 ``` 
 VPC_STACK_NAME=ecs-stack 
 VPC_TEMPLATE=ecs-cluster.yaml
 aws cloudformation deploy --stack-name $VPC_STACK_NAME --template-file $VPC_TEMPLATE --capabilities CAPABILITY_IAM 
 ```
     
-Before proceeding further, export a set of environment variables that are required by scripts used in subsequent steps. Modify the **ACCOUNT_ID** and **AWS_REGION** variables in the *env.sh* script before running the command below.
+Before proceeding further, export a set of environment variables that are required by scripts used in subsequent steps. Modify the **ACCOUNT_ID** and **AWS_REGION** variables in the *env.sh* script before running the command below. -->
 ```
 source env.sh
 ```
