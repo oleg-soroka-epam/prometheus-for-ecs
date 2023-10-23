@@ -58,7 +58,7 @@ source cloudmap.sh
 
 Create a workspace under AMP for ingesting Prometheus metrics scraped from ECS services. 
 ```
-source amp.sh
+source prometheus.sh
 ```
 The above command generates the initial configuration file *prometheus.yaml* for the Prometheus server, with the AMP worksapce as the remote write destination. 
 Create two parameters in the AWS SSM Parameter Store as follows:
