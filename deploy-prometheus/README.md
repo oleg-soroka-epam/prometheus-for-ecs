@@ -56,7 +56,7 @@ Create a service discovery namespace and service registries under AWS Cloud Map.
 source cloudmap.sh
 ```
 
-Create a workspace under AMP for ingesting Prometheus metrics scraped from ECS services. 
+<!-- Create a workspace under AMP for ingesting Prometheus metrics scraped from ECS services.  -->
 ```
 source prometheus.sh
 ```
